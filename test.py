@@ -1,11 +1,18 @@
-
 import sqlite3
+from flask import Flask, request
+
+app = Flask(__name__)
 
 
-def get_user(user_input):
+@app.route("/user")
+def search_user():
+    # CodeQL detecta claramente que entrada del usuario (request.args)
+    # va directo a la query SQL sin sanitizar
+    user_input = request.args.get("username")
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
-    # Vulnerabilidad de SQL Injection directa:
+
     query = f"SELECT * FROM users WHERE username = '{user_input}'"
     cursor.execute(query)
+
     return cursor.fetchall()
