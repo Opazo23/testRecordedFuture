@@ -3,7 +3,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-
+PI_KEY = "AKIAIOSFODNN7EXAMPLE"  # fake AWS key
 @app.route("/user")
 def search_user():
     # CodeQL detecta claramente que entrada del usuario (request.args)
