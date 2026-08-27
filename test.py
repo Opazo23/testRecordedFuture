@@ -12,7 +12,7 @@ def search_user():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    query = f"SELECT * FROM testonum WHERE username = '{user_input}'"
-    cursor.execute(query)
+    query = "SELECT * FROM testonum WHERE username = ?"
+    cursor.execute(query, (user_input,))
 
     return cursor.fetchall()
